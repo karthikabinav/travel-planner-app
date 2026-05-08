@@ -175,4 +175,3 @@ def budget_calc(org, dest, days, date:list , people_number=None, local_constrain
         budgets[mode] = total_budget
 
     return budgets
-
