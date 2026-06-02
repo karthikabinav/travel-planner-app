@@ -95,14 +95,6 @@ def budget_calc(org, dest, days, date:list , people_number=None, local_constrain
         elif local_constraint['transportation'] == 'no flight':
             if len(flight_data[flight_data['FlightDate'] == date[0]]) < 2 or flight_data.iloc[0]['Distance'] > 800:
                 raise ValueError("Impossible")
-            
-        # if local_constraint['flgiht time']:
-        #     if local_constraint['flgiht time'] == 'morning':
-        #         flight_data = flight_data[flight_data['DepTime'] < '12:00']
-        #     elif local_constraint['flgiht time'] == 'afternoon':
-        #         flight_data = flight_data[(flight_data['DepTime'] >= '12:00') & (flight_data['DepTime'] < '18:00')]
-        #     elif local_constraint['flgiht time'] == 'evening':
-        #         flight_data = flight_data[flight_data['DepTime'] >= '18:00']
 
         if local_constraint['room type']:
             if local_constraint['room type'] == 'shared room':
@@ -126,7 +118,6 @@ def budget_calc(org, dest, days, date:list , people_number=None, local_constrain
         
         if local_constraint['house rule']:
             if local_constraint['house rule'] == 'parties':
-                # the house rule should not contain 'parties'
                 hotel_data = hotel_data[~hotel_data['house_rules'].str.contains('No parties')]
             elif local_constraint['house rule'] == 'smoking':
                 hotel_data = hotel_data[~hotel_data['house_rules'].str.contains('No smoking')]
@@ -148,7 +139,6 @@ def budget_calc(org, dest, days, date:list , people_number=None, local_constrain
                     raise ValueError("No hotel data available for the given constraints.")
                 
         if local_constraint['cuisine']:
-            # judge whether the cuisine is in the cuisine list
             restaurant_data = restaurant_data[restaurant_data['Cuisines'].str.contains('|'.join(local_constraint['cuisine']))]
             
             if days == 3:
@@ -175,4 +165,3 @@ def budget_calc(org, dest, days, date:list , people_number=None, local_constrain
         budgets[mode] = total_budget
 
     return budgets
-
