@@ -24,7 +24,6 @@ def estimate_budget(data, mode):
         data = [x for x in data if str(x) != 'nan']
         return sum(data) / len(data)
     
-
 def budget_calc(org, dest, days, date:list , people_number=None, local_constraint = None):
     """
     Calculate the estimated budget for all three modes: lowest, highest, average.
@@ -52,15 +51,16 @@ def budget_calc(org, dest, days, date:list , people_number=None, local_constrain
 
 
     elif grain == "state":
-        city_set = open('../database/background/citySet_with_states.txt').read().strip().split('\n')
+        city_set = open('../database/background/citySet_with_states.txt').read().strip().split('
+')
         
         all_hotel_data = []
         all_restaurant_data = []
         all_flight_data = []
         
         for city in city_set:
-            if dest == city.split('\t')[1]:
-                candidate_city = city.split('\t')[0]
+            if dest == city.split('	')[1]:
+                candidate_city = city.split('	')[0]
                 
                 # Fetch data for the current city
                 current_hotel_data = hotel.run(candidate_city)
@@ -95,6 +95,14 @@ def budget_calc(org, dest, days, date:list , people_number=None, local_constrain
         elif local_constraint['transportation'] == 'no flight':
             if len(flight_data[flight_data['FlightDate'] == date[0]]) < 2 or flight_data.iloc[0]['Distance'] > 800:
                 raise ValueError("Impossible")
+            
+        # if local_constraint['flgiht time']:
+        #     if local_constraint['flgiht time'] == 'morning':
+        #         flight_data = flight_data[flight_data['DepTime'] < '12:00']
+        #     elif local_constraint['flgiht time'] == 'afternoon':
+        #         flight_data = flight_data[(flight_data['DepTime'] >= '12:00') & (flight_data['DepTime'] < '18:00')]
+        #     elif local_constraint['flgiht time'] == 'evening':
+        #         flight_data = flight_data[flight_data['DepTime'] >= '18:00']
 
         if local_constraint['room type']:
             if local_constraint['room type'] == 'shared room':
@@ -118,6 +126,7 @@ def budget_calc(org, dest, days, date:list , people_number=None, local_constrain
         
         if local_constraint['house rule']:
             if local_constraint['house rule'] == 'parties':
+                # the house rule should not contain 'parties'
                 hotel_data = hotel_data[~hotel_data['house_rules'].str.contains('No parties')]
             elif local_constraint['house rule'] == 'smoking':
                 hotel_data = hotel_data[~hotel_data['house_rules'].str.contains('No smoking')]
@@ -139,6 +148,7 @@ def budget_calc(org, dest, days, date:list , people_number=None, local_constrain
                     raise ValueError("No hotel data available for the given constraints.")
                 
         if local_constraint['cuisine']:
+            # judge whether the cuisine is in the cuisine list
             restaurant_data = restaurant_data[restaurant_data['Cuisines'].str.contains('|'.join(local_constraint['cuisine']))]
             
             if days == 3:
