@@ -1,11 +1,1 @@
-// Main application entry point
-const express = require('express');
-const app = express();
-
-app.get('/', (req, res) => {
-  res.send('Welcome to Travel Planner!');
-});
-
-app.listen(3000, () => {
-  console.log('Server running on port 3000');
-});
+Ly8gTWFpbiBhcHBsaWNhdGlvbiBlbnRyeSBwb2ludApjb25zdCBleHByZXNzID0gcmVxdWlyZSgnZXhwcmVzcycpOwpjb25zdCBhcHAgPSBleHByZXNzKCk7CgphcHAuZ2V0KCcvJywgKHJlcSwgcmVzKSA9PiB7CiAgcmVzLnNlbmQoJ1dlbGNvbWUgdG8gVHJhdmVsIFBsYW5uZXIhJyk7Cn0pOwoKYXBwLmxpc3RlbigzMDAwLCAoKSA9PiB7CiAgY29uc29sZS5sb2coJ1NlcnZlciBydW5uaW5nIG9uIHBvcnQgMzAwMCcpOwp9KTs=
