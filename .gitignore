@@ -1,12 +1,1 @@
-# Node dependencies
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Python cache and virtual environments
-__pycache__/
-*.pyc
-*.py.class
-venv/
-*.env
+IyBOb2RlIGRlcGVuZGVuY2llcwpub2RlX21vZHVsZXMvCm5wbS1kZWJ1Zy5sb2cqCnlhcm4tZGVidWcubG9nKgp5YXJuLWVycm9yLmxvZyoKCiMgUHl0aG9uIGNhY2hlIGFuZCB2aXJ0dWFsIGVudmlyb25tZW50cwpfX3B5Y2FjaGVfXy8KKi5weWMKKi5weS5jbGFzcwp2ZW52LwoqLmVudg==
