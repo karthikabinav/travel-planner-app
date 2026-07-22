@@ -1,1 +1,178 @@
-ZnJvbSB0b29scy5hY2NvbW1vZGF0aW9ucy5hcGlzIGltcG9ydCBBY2NvbW1vZGF0aW9ucwpmcm9tIHRvb2xzLmZsaWdodHMuYXBpcyBpbXBvcnQgRmxpZ2h0cwpmcm9tIHRvb2xzLnJlc3RhdXJhbnRzLmFwaXMgaW1wb3J0IFJlc3RhdXJhbnRzCmZyb20gdG9vbHMuZ29vZ2xlRGlzdGFuY2VNYXRyaXguYXBpcyBpbXBvcnQgR29vZ2xlRGlzdGFuY2VNYXRyaXgKaW1wb3J0IHBhbmRhcyBhcyBwZAoKaG90ZWwgPSBBY2NvbW1vZGF0aW9ucygpCmZsaWdodCA9IEZsaWdodHMoKQpmbGlnaHQubG9hZF9kYigpCnJlc3RhdXJhbnQgPSBSZXN0YXVyYW50cygpCmRpc3RhbmNlTWF0cml4ID0gR29vZ2xlRGlzdGFuY2VNYXRyaXgoKQoKCmRlZiBlc3RpbWF0ZV9idWRnZXQoZGF0YSwgbW9kZSk6CiAgICAiIiIKICAgIEVzdGltYXRlIHRoZSBidWRnZXQgYmFzZWQgb24gdGhlIG1vZGUgKGxvd2VzdCwgaGlnaGVzdCwgYXZlcmFnZSkgZm9yIGZsaWdodCwgaG90ZWwsIG9yIHJlc3RhdXJhbnQgZGF0YS4KICAgICIiIgogICAgaWYgbW9kZSA9PSAibG93ZXN0IjoKICAgICAgICByZXR1cm4gbWluKGRhdGEpCiAgICBlbGlmIG1vZGUgPT0gImhpZ2hlc3QiOgogICAgICAgIHJldHVybiBtYXgoZGF0YSkKICAgIGVsaWYgbW9kZSA9PSAiYXZlcmFnZSI6CiAgICAgICAgIyBmaWx0ZXIgdGhlIG5hbiB2YWx1ZXMKICAgICAgICBkYXRhID0gW3ggZm9yIHggaW4gZGF0YSBpZiBzdHIoeCkgIT0gJ25hbiddCiAgICAgICAgcmV0dXJuIHN1bShkYXRhKSAvIGxlbihkYXRhKQogICAgCgpkZWYgYnVkZ2V0X2NhbGMob3JnLCBkZXN0LCBkYXlzLCBkYXRlOmxpc3QgLCBwZW9wbGVfbnVtYmVyPU5vbmUsIGxvY2FsX2NvbnN0cmFpbnQgPSBOb25lKToKICAgICIiIgogICAgQ2FsY3VsYXRlIHRoZSBlc3RpbWF0ZWQgYnVkZ2V0IGZvciBhbGwgdGhyZWUgbW9kZXM6IGxvd2VzdCwgaGlnaGVzdCwgYXZlcmFnZS4KICAgIGdyYWluOiBjaXR5LCBzdGF0ZQogICAgIiIiCiAgICBpZiBkYXlzID09IDM6CiAgICAgICAgZ3JhaW4gPSAiY2l0eSIKICAgIGVsaWYgZGF5cyBpbiBbNSw3XToKICAgICAgICBncmFpbiA9ICJzdGF0ZSIKCiAgICBpZiBncmFpbiBub3QgaW4gWyJjaXR5IiwgInN0YXRlIl06CiAgICAgICAgcmFpc2UgVmFsdWVFcnJvcigiZ3JhaW4gbXVzdCBiZSBvbmUgb2YgY2l0eSwgc3RhdGUiKQogICAgCiAgICAjIE11bHRpcGxpZXJzIGJhc2VkIG9uIGRheXMKICAgIG11bHRpcGxpZXJzID0gewogICAgICAgIDM6IHsiZmxpZ2h0IjogMiwgImhvdGVsIjogMywgInJlc3RhdXJhbnQiOiA5fSwKICAgICAgICA1OiB7ImZsaWdodCI6IDMsICJob3RlbCI6IDUsICJyZXN0YXVyYW50IjogMTV9LAogICAgICAgIDc6IHsiZmxpZ2h0IjogNCwgImhvdGVsIjogNywgInJlc3RhdXJhbnQiOiAyMX0KICAgIH0KICAgIAogICAgaWYgZ3JhaW4gPT0gImNpdHkiOgogICAgICAgIGhvdGVsX2RhdGEgPSBob3RlbC5ydW4oZGVzdCkKICAgICAgICByZXN0YXVyYW50X2RhdGEgPSByZXN0YXVyYW50LnJ1bihkZXN0KQogICAgICAgIGZsaWdodF9kYXRhID0gZmxpZ2h0LmRhdGFbKGZsaWdodC5kYXRhWyJEZXN0Q2l0eU5hbWUiXSA9PSBkZXN0KSAmIChmbGlnaHQuZGF0YVsiT3JpZ2luQ2l0eU5hbWUiXSA9PSBvcmcpXQoKCiAgICBlbGlmIGdyYWluID09ICJzdGF0ZSI6CiAgICAgICAgY2l0eV9zZXQgPSBvcGVuKCcuLi9kYXRhYmFzZS9iYWNrZ3JvdW5kL2NpdHlTZXRfd2l0aF9zdGF0ZXMudHh0JykucmVhZCgpLnN0cmlwKCkuc3BsaXQoJ1xuJykKICAgICAgICAKICAgICAgICBhbGxfaG90ZWxfZGF0YSA9IFtdCiAgICAgICAgYWxsX3Jlc3RhdXJhbnRfZGF0YSA9IFtdCiAgICAgICAgYWxsX2ZsaWdodF9kYXRhID0gW10KICAgICAgICAKICAgICAgICBmb3IgY2l0eSBpbiBjaXR5X3NldDoKICAgICAgICAgICAgaWYgZGVzdCA9PSBjaXR5LnNwbGl0KCdcdCcpWzFdOgogICAgICAgICAgICAgICAgY2FuZGlkYXRlX2NpdHkgPSBjaXR5LnNwbGl0KCdcdCcpWzBdCiAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICMgRmV0Y2ggZGF0YSBmb3IgdGhlIGN1cnJlbnQgY2l0eQogICAgICAgICAgICAgICAgY3VycmVudF9ob3RlbF9kYXRhID0gaG90ZWwucnVuKGNhbmRpZGF0ZV9jaXR5KQogICAgICAgICAgICAgICAgY3VycmVudF9yZXN0YXVyYW50X2RhdGEgPSByZXN0YXVyYW50LnJ1bihjYW5kaWRhdGVfY2l0eSkKICAgICAgICAgICAgICAgIGN1cnJlbnRfZmxpZ2h0X2RhdGEgPSBmbGlnaHQuZGF0YVsoZmxpZ2h0LmRhdGFbIkRlc3RDaXR5TmFtZSJdID09IGNhbmRpZGF0ZV9jaXR5KSAmIChmbGlnaHQuZGF0YVsiT3JpZ2luQ2l0eU5hbWUiXSA9PSBvcmcpXQogICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAjIEFwcGVuZCB0aGUgZGF0YWZyYW1lcyB0byB0aGUgbGlzdHMKICAgICAgICAgICAgICAgIGFsbF9ob3RlbF9kYXRhLmFwcGVuZChjdXJyZW50X2hvdGVsX2RhdGEpCiAgICAgICAgICAgICAgICBhbGxfcmVzdGF1cmFudF9kYXRhLmFwcGVuZChjdXJyZW50X3Jlc3RhdXJhbnRfZGF0YSkKICAgICAgICAgICAgICAgIGFsbF9mbGlnaHRfZGF0YS5hcHBlbmQoY3VycmVudF9mbGlnaHRfZGF0YSkKICAgICAgICAKICAgICAgICAjIFVzZSBjb25jYXQgdG8gY29tYmluZSBhbGwgZGF0YWZyYW1lcyBpbiB0aGUgbGlzdHMKICAgICAgICBob3RlbF9kYXRhID0gcGQuY29uY2F0KGFsbF9ob3RlbF9kYXRhLCBheGlzPTApCiAgICAgICAgcmVzdGF1cmFudF9kYXRhID0gcGQuY29uY2F0KGFsbF9yZXN0YXVyYW50X2RhdGEsIGF4aXM9MCkKICAgICAgICBmbGlnaHRfZGF0YSA9IHBkLmNvbmNhdChhbGxfZmxpZ2h0X2RhdGEsIGF4aXM9MCkKICAgICAgICAjIGZsaWdodF9kYXRhIHNob3VsZCBiZSBpbiB0aGUgcmFuZ2Ugb2Ygc3VwcG9ydGVkIGRhdGUKICAgICAgICBmbGlnaHRfZGF0YSA9IGZsaWdodF9kYXRhW2ZsaWdodF9kYXRhWydGbGlnaHREYXRlJ10uaXNpbihkYXRlKV0KCiAgICBpZiBwZW9wbGVfbnVtYmVyOgogICAgICAgIGhvdGVsX2RhdGEgPSBob3RlbF9kYXRhW2hvdGVsX2RhdGFbJ21heGltdW0gb2NjdXBhbmN5J10gPj0gcGVvcGxlX251bWJlcl0KCiAgICBpZiBsb2NhbF9jb25zdHJhaW50OgoKICAgICAgICBpZiBsb2NhbF9jb25zdHJhaW50Wyd0cmFuc3BvcnRhdGlvbiddID09ICdubyBzZWxmLWRyaXZpbmcnOgogICAgICAgICAgICBpZiBncmFpbiA9PSAiY2l0eSI6CiAgICAgICAgICAgICAgICBpZiBsZW4oZmxpZ2h0X2RhdGFbZmxpZ2h0X2RhdGFbJ0ZsaWdodERhdGUnXSA9PSBkYXRlWzBdXSkgPCAyOgogICAgICAgICAgICAgICAgICAgIHJhaXNlIFZhbHVlRXJyb3IoIk5vIGZsaWdodCBkYXRhIGF2YWlsYWJsZSBmb3IgdGhlIGdpdmVuIGNvbnN0cmFpbnRzLiIpCiAgICAgICAgICAgIGVsaWYgZ3JhaW4gPT0gInN0YXRlIjoKICAgICAgICAgICAgICAgIGlmIGxlbihmbGlnaHRfZGF0YVtmbGlnaHRfZGF0YVsnRmxpZ2h0RGF0ZSddID09IGRhdGVbMF1dKSA8IDEwOgogICAgICAgICAgICAgICAgICAgIHJhaXNlIFZhbHVlRXJyb3IoIk5vIGZsaWdodCBkYXRhIGF2YWlsYWJsZSBmb3IgdGhlIGdpdmVuIGNvbnN0cmFpbnRzLiIpCiAgICAgICAgICAgICAgICAKICAgICAgICBlbGlmIGxvY2FsX2NvbnN0cmFpbnRbJ3RyYW5zcG9ydGF0aW9uJ10gPT0gJ25vIGZsaWdodCc6CiAgICAgICAgICAgIGlmIGxlbihmbGlnaHRfZGF0YVtmbGlnaHRfZGF0YVsnRmxpZ2h0RGF0ZSddID09IGRhdGVbMF1dKSA8IDIgb3IgZmxpZ2h0X2RhdGEuaWxvY1swXVsnRGlzdGFuY2UnXSA+IDgwMDoKICAgICAgICAgICAgICAgIHJhaXNlIFZhbHVlRXJyb3IoIkltcG9zc2libGUiKQogICAgICAgICAgICAKICAgICAgICAjIGlmIGxvY2FsX2NvbnN0cmFpbnRbJ2ZsZ2lodCB0aW1lJ106CiAgICAgICAgIyAgICAgaWYgbG9jYWxfY29uc3RyYWludFsnZmxnaWh0IHRpbWUnXSA9PSAnbW9ybmluZyc6CiAgICAgICAgIyAgICAgICAgIGZsaWdodF9kYXRhID0gZmxpZ2h0X2RhdGFbZmxpZ2h0X2RhdGFbJ0RlcFRpbWUnXSA8ICcxMjowMCddCiAgICAgICAgIyAgICAgZWxpZiBsb2NhbF9jb25zdHJhaW50WydmbGdpaHQgdGltZSddID09ICdhZnRlcm5vb24nOgogICAgICAgICMgICAgICAgICBmbGlnaHRfZGF0YSA9IGZsaWdodF9kYXRhWyhmbGlnaHRfZGF0YVsnRGVwVGltZSddID49ICcxMjowMCcpICYgKGZsaWdodF9kYXRhWydEZXBUaW1lJ10gPCAnMTg6MDAnKV0KICAgICAgICAjICAgICBlbGlmIGxvY2FsX2NvbnN0cmFpbnRbJ2ZsZ2lodCB0aW1lJ10gPT0gJ2V2ZW5pbmcnOgogICAgICAgICMgICAgICAgICBmbGlnaHRfZGF0YSA9IGZsaWdodF9kYXRhW2ZsaWdodF9kYXRhWydEZXBUaW1lJ10gPj0gJzE4OjAwJ10KCiAgICAgICAgaWYgbG9jYWxfY29uc3RyYWludFsncm9vbSB0eXBlJ106CiAgICAgICAgICAgIGlmIGxvY2FsX2NvbnN0cmFpbnRbJ3Jvb20gdHlwZSddID09ICdzaGFyZWQgcm9vbSc6CiAgICAgICAgICAgICAgICBob3RlbF9kYXRhID0gaG90ZWxfZGF0YVtob3RlbF9kYXRhWydyb29tIHR5cGUnXSA9PSAnU2hhcmVkIHJvb20nXQogICAgICAgICAgICBlbGlmIGxvY2FsX2NvbnN0cmFpbnRbJ3Jvb20gdHlwZSddID09ICdub3Qgc2hhcmVkIHJvb20nOgogICAgICAgICAgICAgICAgaG90ZWxfZGF0YSA9IGhvdGVsX2RhdGFbKGhvdGVsX2RhdGFbJ3Jvb20gdHlwZSddID09ICdQcml2YXRlIHJvb20nKSB8IChob3RlbF9kYXRhWydyb29tIHR5cGUnXSA9PSAnRW50aXJlIGhvbWUvYXB0JyldCiAgICAgICAgICAgIGVsaWYgbG9jYWxfY29uc3RyYWludFsncm9vbSB0eXBlJ10gPT0gJ3ByaXZhdGUgcm9vbSc6CiAgICAgICAgICAgICAgICBob3RlbF9kYXRhID0gaG90ZWxfZGF0YVtob3RlbF9kYXRhWydyb29tIHR5cGUnXSA9PSAnUHJpdmF0ZSByb29tJ10KICAgICAgICAgICAgZWxpZiBsb2NhbF9jb25zdHJhaW50Wydyb29tIHR5cGUnXSA9PSAnZW50aXJlIHJvb20nOgogICAgICAgICAgICAgICAgaG90ZWxfZGF0YSA9IGhvdGVsX2RhdGFbaG90ZWxfZGF0YVsncm9vbSB0eXBlJ10gPT0gJ0VudGlyZSBob21lL2FwdCddCgogICAgICAgICAgICBpZiBkYXlzID09IDM6CiAgICAgICAgICAgICAgICBpZiBsZW4oaG90ZWxfZGF0YSkgPCAzOgogICAgICAgICAgICAgICAgICAgIHJhaXNlIFZhbHVlRXJyb3IoIk5vIGhvdGVsIGRhdGEgYXZhaWxhYmxlIGZvciB0aGUgZ2l2ZW4gY29uc3RyYWludHMuIikKICAgICAgICAgICAgZWxpZiBkYXlzID09IDU6CiAgICAgICAgICAgICAgICBpZiBsZW4oaG90ZWxfZGF0YSkgPCA1OgogICAgICAgICAgICAgICAgICAgIHJhaXNlIFZhbHVlRXJyb3IoIk5vIGhvdGVsIGRhdGEgYXZhaWxhYmxlIGZvciB0aGUgZ2l2ZW4gY29uc3RyYWludHMuIikKICAgICAgICAgICAgZWxpZiBkYXlzID09IDc6CiAgICAgICAgICAgICAgICBpZiBsZW4oaG90ZWxfZGF0YSkgPCA3OgogICAgICAgICAgICAgICAgICAgIHJhaXNlIFZhbHVlRXJyb3IoIk5vIGhvdGVsIGRhdGEgYXZhaWxhYmxlIGZvciB0aGUgZ2l2ZW4gY29uc3RyYWludHMuIikKICAgICAgICAKICAgICAgICBpZiBsb2NhbF9jb25zdHJhaW50Wydob3VzZSBydWxlJ106CiAgICAgICAgICAgIGlmIGxvY2FsX2NvbnN0cmFpbnRbJ2hvdXNlIHJ1bGUnXSA9PSAncGFydGllcyc6CiAgICAgICAgICAgICAgICAjIHRoZSBob3VzZSBydWxlIHNob3VsZCBub3QgY29udGFpbiAncGFydGllcycKICAgICAgICAgICAgICAgIGhvdGVsX2RhdGEgPSBob3RlbF9kYXRhW35ob3RlbF9kYXRhWydob3VzZV9ydWxlcyddLnN0ci5jb250YWlucygnTm8gcGFydGllcycpXQogICAgICAgICAgICBlbGlmIGxvY2FsX2NvbnN0cmFpbnRbJ2hvdXNlIHJ1bGUnXSA9PSAnc21va2luZyc6CiAgICAgICAgICAgICAgICBob3RlbF9kYXRhID0gaG90ZWxfZGF0YVt+aG90ZWxfZGF0YVsnaG91c2VfcnVsZXMnXS5zdHIuY29udGFpbnMoJ05vIHNtb2tpbmcnKV0KICAgICAgICAgICAgZWxpZiBsb2NhbF9jb25zdHJhaW50Wydob3VzZSBydWxlJ10gPT0gJ2NoaWxkcmVuIHVuZGVyIDEwJzoKICAgICAgICAgICAgICAgIGhvdGVsX2RhdGEgPSBob3RlbF9kYXRhW35ob3RlbF9kYXRhWydob3VzZV9ydWxlcyddLnN0ci5jb250YWlucygnTm8gY2hpbGRyZW4gdW5kZXIgMTAnKV0KICAgICAgICAgICAgZWxpZiBsb2NhbF9jb25zdHJhaW50Wydob3VzZSBydWxlJ10gPT0gJ3BldHMnOgogICAgICAgICAgICAgICAgaG90ZWxfZGF0YSA9IGhvdGVsX2RhdGFbfmhvdGVsX2RhdGFbJ2hvdXNlX3J1bGVzJ10uc3RyLmNvbnRhaW5zKCdObyBwZXRzJyldCiAgICAgICAgICAgIGVsaWYgbG9jYWxfY29uc3RyYWludFsnaG91c2UgcnVsZSddID09ICd2aXNpdG9ycyc6CiAgICAgICAgICAgICAgICBob3RlbF9kYXRhID0gaG90ZWxfZGF0YVt+aG90ZWxfZGF0YVsnaG91c2VfcnVsZXMnXS5zdHIuY29udGFpbnMoJ05vIHZpc2l0b3JzJyldCiAgICAgICAgCiAgICAgICAgICAgIGlmIGRheXMgPT0gMzoKICAgICAgICAgICAgICAgIGlmIGxlbihob3RlbF9kYXRhKSA8IDM6CiAgICAgICAgICAgICAgICAgICAgcmFpc2UgVmFsdWVFcnJvcigiTm8gaG90ZWwgZGF0YSBhdmFpbGFibGUgZm9yIHRoZSBnaXZlbiBjb25zdHJhaW50cy4iKQogICAgICAgICAgICBlbGlmIGRheXMgPT0gNToKICAgICAgICAgICAgICAgIGlmIGxlbihob3RlbF9kYXRhKSA8IDU6CiAgICAgICAgICAgICAgICAgICAgcmFpc2UgVmFsdWVFcnJvcigiTm8gaG90ZWwgZGF0YSBhdmFpbGFibGUgZm9yIHRoZSBnaXZlbiBjb25zdHJhaW50cy4iKQogICAgICAgICAgICBlbGlmIGRheXMgPT0gNzoKICAgICAgICAgICAgICAgIGlmIGxlbihob3RlbF9kYXRhKSA8IDc6CiAgICAgICAgICAgICAgICAgICAgcmFpc2UgVmFsdWVFcnJvcigiTm8gaG90ZWwgZGF0YSBhdmFpbGFibGUgZm9yIHRoZSBnaXZlbiBjb25zdHJhaW50cy4iKQogICAgICAgICAgICAgICAgCiAgICAgICAgaWYgbG9jYWxfY29uc3RyYWludFsnY3Vpc2luZSddOgogICAgICAgICAgICAjIGp1ZGdlIHdoZXRoZXIgdGhlIGN1aXNpbmUgaXMgaW4gdGhlIGN1aXNpbmUgbGlzdAogICAgICAgICAgICByZXN0YXVyYW50X2RhdGEgPSByZXN0YXVyYW50X2RhdGFbcmVzdGF1cmFudF9kYXRhWydDdWlzaW5lcyddLnN0ci5jb250YWlucygnfCcuam9pbihsb2NhbF9jb25zdHJhaW50WydjdWlzaW5lJ10pKV0KICAgICAgICAgICAgCiAgICAgICAgICAgIGlmIGRheXMgPT0gMzoKICAgICAgICAgICAgICAgIGlmIGxlbihyZXN0YXVyYW50X2RhdGEpIDwgMzoKICAgICAgICAgICAgICAgICAgICByYWlzZSBWYWx1ZUVycm9yKCJObyByZXN0YXVyYW50IGRhdGEgYXZhaWxhYmxlIGZvciB0aGUgZ2l2ZW4gY29uc3RyYWludHMuIikKICAgICAgICAgICAgZWxpZiBkYXlzID09IDU6CiAgICAgICAgICAgICAgICBpZiBsZW4ocmVzdGF1cmFudF9kYXRhKSA8IDU6CiAgICAgICAgICAgICAgICAgICAgcmFpc2UgVmFsdWVFcnJvcigiTm8gcmVzdGF1cmFudCBkYXRhIGF2YWlsYWJsZSBmb3IgdGhlIGdpdmVuIGNvbnN0cmFpbnRzLiIpCiAgICAgICAgICAgIGVsaWYgZGF5cyA9PSA3OgogICAgICAgICAgICAgICAgaWYgbGVuKHJlc3RhdXJhbnRfZGF0YSkgPCA3OgogICAgICAgICAgICAgICAgICAgIHJhaXNlIFZhbHVlRXJyb3IoIk5vIHJlc3RhdXJhbnQgZGF0YSBhdmFpbGFibGUgZm9yIHRoZSBnaXZlbiBjb25zdHJhaW50cy4iKQoKICAgICMgQ2FsY3VsYXRlIGJ1ZGdldHMgZm9yIGFsbCB0aHJlZSBtb2RlcwoKICAgIGJ1ZGdldHMgPSB7fQogICAgZm9yIG1vZGUgaW4gWyJsb3dlc3QiLCAiaGlnaGVzdCIsICJhdmVyYWdlIl06CiAgICAgICAgaWYgbG9jYWxfY29uc3RyYWludCBhbmQgbG9jYWxfY29uc3RyYWludFsndHJhbnNwb3J0YXRpb24nXSA9PSAnc2VsZiBkcml2aW5nJzoKICAgICAgICAgICAgZmxpZ2h0X2J1ZGdldCA9IGV2YWwoZGlzdGFuY2VNYXRyaXgucnVuKG9yZywgZGVzdClbJ2Nvc3QnXS5yZXBsYWNlKCIkIiwiIikpICogbXVsdGlwbGllcnNbZGF5c11bImZsaWdodCJdCiAgICAgICAgZWxzZToKICAgICAgICAgICAgZmxpZ2h0X2J1ZGdldCA9IGVzdGltYXRlX2J1ZGdldChmbGlnaHRfZGF0YVsiUHJpY2UiXS50b2xpc3QoKSwgbW9kZSkgKiBtdWx0aXBsaWVyc1tkYXlzXVsiZmxpZ2h0Il0KICAgICAgICBob3RlbF9idWRnZXQgPSBlc3RpbWF0ZV9idWRnZXQoaG90ZWxfZGF0YVsicHJpY2UiXS50b2xpc3QoKSwgbW9kZSkgKiBtdWx0aXBsaWVyc1tkYXlzXVsiaG90ZWwiXQogICAgICAgIHJlc3RhdXJhbnRfYnVkZ2V0ID0gZXN0aW1hdGVfYnVkZ2V0KHJlc3RhdXJhbnRfZGF0YVsiQXZlcmFnZSBDb3N0Il0udG9saXN0KCksIG1vZGUpICogbXVsdGlwbGllcnNbZGF5c11bInJlc3RhdXJhbnQiXQogICAgICAgIHRvdGFsX2J1ZGdldCA9IGZsaWdodF9idWRnZXQgKyBob3RlbF9idWRnZXQgKyByZXN0YXVyYW50X2J1ZGdldAogICAgICAgIGJ1ZGdldHNbbW9kZV0gPSB0b3RhbF9idWRnZXQKCiAgICByZXR1cm4gYnVkZ2V0cwoK
+from tools.accommodations.apis import Accommodations
+from tools.flights.apis import Flights
+from tools.restaurants.apis import Restaurants
+from tools.googleDistanceMatrix.apis import GoogleDistanceMatrix
+import pandas as pd
+
+hotel = Accommodations()
+flight = Flights()
+flight.load_db()
+restaurant = Restaurants()
+distanceMatrix = GoogleDistanceMatrix()
+
+
+def estimate_budget(data, mode):
+    """
+    Estimate the budget based on the mode (lowest, highest, average) for flight, hotel, or restaurant data.
+    """
+    if mode == "lowest":
+        return min(data)
+    elif mode == "highest":
+        return max(data)
+    elif mode == "average":
+        # filter the nan values
+        data = [x for x in data if str(x) != 'nan']
+        return sum(data) / len(data)
+    
+
+def budget_calc(org, dest, days, date:list , people_number=None, local_constraint = None):
+    """
+    Calculate the estimated budget for all three modes: lowest, highest, average.
+    grain: city, state
+    """
+    if days == 3:
+        grain = "city"
+    elif days in [5,7]:
+        grain = "state"
+
+    if grain not in ["city", "state"]:
+        raise ValueError("grain must be one of city, state")
+    
+    # Multipliers based on days
+    multipliers = {
+        3: {"flight": 2, "hotel": 3, "restaurant": 9},
+        5: {"flight": 3, "hotel": 5, "restaurant": 15},
+        7: {"flight": 4, "hotel": 7, "restaurant": 21}
+    }
+    
+    if grain == "city":
+        hotel_data = hotel.run(dest)
+        restaurant_data = restaurant.run(dest)
+        flight_data = flight.data[(flight.data["DestCityName"] == dest) & (flight.data["OriginCityName"] == org)]
+
+
+    elif grain == "state":
+        city_set = open('../database/background/citySet_with_states.txt').read().strip().split('\n')
+        
+        all_hotel_data = []
+        all_restaurant_data = []
+        all_flight_data = []
+        
+        for city in city_set:
+            if dest == city.split('\t')[1]:
+                candidate_city = city.split('\t')[0]
+                
+                # Fetch data for the current city
+                current_hotel_data = hotel.run(candidate_city)
+                current_restaurant_data = restaurant.run(candidate_city)
+                current_flight_data = flight.data[(flight.data["DestCityName"] == candidate_city) & (flight.data["OriginCityName"] == org)]
+                
+                # Append the dataframes to the lists
+                all_hotel_data.append(current_hotel_data)
+                all_restaurant_data.append(current_restaurant_data)
+                all_flight_data.append(current_flight_data)
+        
+        # Use concat to combine all dataframes in the lists
+        hotel_data = pd.concat(all_hotel_data, axis=0)
+        restaurant_data = pd.concat(all_restaurant_data, axis=0)
+        flight_data = pd.concat(all_flight_data, axis=0)
+        # flight_data should be in the range of supported date
+        flight_data = flight_data[flight_data['FlightDate'].isin(date)]
+
+    if people_number:
+        hotel_data = hotel_data[hotel_data['maximum occupancy'] >= people_number]
+
+    if local_constraint:
+
+        if local_constraint['transportation'] == 'no self-driving':
+            if grain == "city":
+                if len(flight_data[flight_data['FlightDate'] == date[0]]) < 2:
+                    raise ValueError("No flight data available for the given constraints.")
+            elif grain == "state":
+                if len(flight_data[flight_data['FlightDate'] == date[0]]) < 10:
+                    raise ValueError("No flight data available for the given constraints.")
+                
+        elif local_constraint['transportation'] == 'no flight':
+            if len(flight_data[flight_data['FlightDate'] == date[0]]) < 2 or flight_data.iloc[0]['Distance'] > 800:
+                raise ValueError("Impossible")
+            
+        # if local_constraint['flgiht time']:
+        #     if local_constraint['flgiht time'] == 'morning':
+        #         flight_data = flight_data[flight_data['DepTime'] < '12:00']
+        #     elif local_constraint['flgiht time'] == 'afternoon':
+        #         flight_data = flight_data[(flight_data['DepTime'] >= '12:00') & (flight_data['DepTime'] < '18:00')]
+        #     elif local_constraint['flgiht time'] == 'evening':
+        #         flight_data = flight_data[flight_data['DepTime'] >= '18:00']
+
+        if local_constraint['room type']:
+            if local_constraint['room type'] == 'shared room':
+                hotel_data = hotel_data[hotel_data['room type'] == 'Shared room']
+            elif local_constraint['room type'] == 'not shared room':
+                hotel_data = hotel_data[(hotel_data['room type'] == 'Private room') | (hotel_data['room type'] == 'Entire home/apt')]
+            elif local_constraint['room type'] == 'private room':
+                hotel_data = hotel_data[hotel_data['room type'] == 'Private room']
+            elif local_constraint['room type'] == 'entire room':
+                hotel_data = hotel_data[hotel_data['room type'] == 'Entire home/apt']
+
+            if days == 3:
+                if len(hotel_data) < 3:
+                    raise ValueError("No hotel data available for the given constraints.")
+            elif days == 5:
+                if len(hotel_data) < 5:
+                    raise ValueError("No hotel data available for the given constraints.")
+            elif days == 7:
+                if len(hotel_data) < 7:
+                    raise ValueError("No hotel data available for the given constraints.")
+        
+        if local_constraint['house rule']:
+            if local_constraint['house rule'] == 'parties':
+                # the house rule should not contain 'parties'
+                hotel_data = hotel_data[~hotel_data['house_rules'].str.contains('No parties')]
+            elif local_constraint['house rule'] == 'smoking':
+                hotel_data = hotel_data[~hotel_data['house_rules'].str.contains('No smoking')]
+            elif local_constraint['house rule'] == 'children under 10':
+                hotel_data = hotel_data[~hotel_data['house_rules'].str.contains('No children under 10')]
+            elif local_constraint['house rule'] == 'pets':
+                hotel_data = hotel_data[~hotel_data['house_rules'].str.contains('No pets')]
+            elif local_constraint['house rule'] == 'visitors':
+                hotel_data = hotel_data[~hotel_data['house_rules'].str.contains('No visitors')]
+        
+            if days == 3:
+                if len(hotel_data) < 3:
+                    raise ValueError("No hotel data available for the given constraints.")
+            elif days == 5:
+                if len(hotel_data) < 5:
+                    raise ValueError("No hotel data available for the given constraints.")
+            elif days == 7:
+                if len(hotel_data) < 7:
+                    raise ValueError("No hotel data available for the given constraints.")
+                
+        if local_constraint['cuisine']:
+            # judge whether the cuisine is in the cuisine list
+            restaurant_data = restaurant_data[restaurant_data['Cuisines'].str.contains('|'.join(local_constraint['cuisine']))]
+            
+            if days == 3:
+                if len(restaurant_data) < 3:
+                    raise ValueError("No restaurant data available for the given constraints.")
+            elif days == 5:
+                if len(restaurant_data) < 5:
+                    raise ValueError("No restaurant data available for the given constraints.")
+            elif days == 7:
+                if len(restaurant_data) < 7:
+                    raise ValueError("No restaurant data available for the given constraints.")
+
+    # Calculate budgets for all three modes
+
+    budgets = {}
+    for mode in ["lowest", "highest", "average"]:
+        if local_constraint and local_constraint['transportation'] == 'self driving':
+            flight_budget = eval(distanceMatrix.run(org, dest)['cost'].replace("$","")) * multipliers[days]["flight"]
+        else:
+            flight_budget = estimate_budget(flight_data["Price"].tolist(), mode) * multipliers[days]["flight"]
+        hotel_budget = estimate_budget(hotel_data["price"].tolist(), mode) * multipliers[days]["hotel"]
+        restaurant_budget = estimate_budget(restaurant_data["Average Cost"].tolist(), mode) * multipliers[days]["restaurant"]
+        total_budget = flight_budget + hotel_budget + restaurant_budget
+        budgets[mode] = total_budget
+
+    return budgets
+
