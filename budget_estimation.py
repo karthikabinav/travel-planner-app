@@ -52,15 +52,15 @@ def budget_calc(org, dest, days, date:list , people_number=None, local_constrain
 
 
     elif grain == "state":
-        city_set = open('../database/background/citySet_with_states.txt').read().strip().split('\n')
+        city_set = open('../database/background/citySet_with_states.txt').read().strip().split('\\n')
         
         all_hotel_data = []
         all_restaurant_data = []
         all_flight_data = []
         
         for city in city_set:
-            if dest == city.split('\t')[1]:
-                candidate_city = city.split('\t')[0]
+            if dest == city.split('\\t')[1]:
+                candidate_city = city.split('\\t')[0]
                 
                 # Fetch data for the current city
                 current_hotel_data = hotel.run(candidate_city)
@@ -175,4 +175,3 @@ def budget_calc(org, dest, days, date:list , people_number=None, local_constrain
         budgets[mode] = total_budget
 
     return budgets
-
