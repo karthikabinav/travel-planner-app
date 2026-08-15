@@ -1,170 +1,232 @@
-from tools.accommodations.apis import Accommodations
-from tools.flights.apis import Flights
-from tools.restaurants.apis import Restaurants
-from tools.googleDistanceMatrix.apis import GoogleDistanceMatrix
-import pandas as pd
+"""Budget estimation — wf.estimate(), output token hints, EstimationReport.
 
-hotel = Accommodations()
-flight = Flights()
-flight.load_db()
-restaurant = Restaurants()
-distanceMatrix = GoogleDistanceMatrix()
+Pre-flight budget estimation lets you check whether your configured budget
+is sufficient before making a single LLM call. Provide output_tokens_estimate
+on agent classes to make estimates more accurate.
 
+Key concepts:
+  - output_tokens_estimate = 350 (int — single p50/p95 hint)
+  - output_tokens_estimate = (200, 800) (tuple — (p50, p95) token range)
+  - wf.estimate("input text") → EstimationReport
+  - EstimationReport.total_p50, .total_p95, .budget_sufficient, .per_step
+  - Budget(preflight=True, preflight_fail_on=PreflightPolicy.BELOW_P95)
 
-def estimate_budget(data, mode):
-    """
-    Estimate the budget based on the mode (lowest, highest, average) for flight, hotel, or restaurant data.
-    """
-    if mode == "lowest":
-        return min(data)
-    elif mode == "highest":
-        return max(data)
-    elif mode == "average":
-        # filter the nan values
-        data = [x for x in data if str(x) != 'nan']
-        return sum(data) / len(data)
-    
+Run:
+    uv run python examples/budget_estimation.py
+"""
 
-def budget_calc(org, dest, days, date:list , people_number=None, local_constraint = None):
-    """
-    Calculate the estimated budget for all three modes: lowest, highest, average.
-    grain: city, state
-    """
-    if days == 3:
-        grain = "city"
-    elif days in [5,7]:
-        grain = "state"
+from __future__ import annotations
 
-    if grain not in ["city", "state"]:
-        raise ValueError("grain must be one of city, state")
-    
-    # Multipliers based on days
-    multipliers = {
-        3: {"flight": 2, "hotel": 3, "restaurant": 9},
-        5: {"flight": 3, "hotel": 5, "restaurant": 15},
-        7: {"flight": 4, "hotel": 7, "restaurant": 21}
-    }
-    
-    if grain == "city":
-        hotel_data = hotel.run(dest)
-        restaurant_data = restaurant.run(dest)
-        flight_data = flight.data[(flight.data["DestCityName"] == dest) & (flight.data["OriginCityName"] == org)]
+import asyncio
+
+from syrin import Agent, Budget, Model
+from syrin.budget import EstimationReport
+from syrin.enums import Hook, PreflightPolicy
+from syrin.response import Response
+from syrin.workflow import Workflow
+
+# ── Agent definitions with output token hints ─────────────────────────────────
+#
+# output_tokens_estimate tells the estimator how many output tokens this
+# agent typically generates. An int is used as both p50 and p95.
+# A (p50, p95) tuple provides a range — use this for variable-length outputs.
 
 
-    elif grain == "state":
-        city_set = open('../database/background/citySet_with_states.txt').read().strip().split('\\n')
-        
-        all_hotel_data = []
-        all_restaurant_data = []
-        all_flight_data = []
-        
-        for city in city_set:
-            if dest == city.split('\\t')[1]:
-                candidate_city = city.split('\\t')[0]
-                
-                # Fetch data for the current city
-                current_hotel_data = hotel.run(candidate_city)
-                current_restaurant_data = restaurant.run(candidate_city)
-                current_flight_data = flight.data[(flight.data["DestCityName"] == candidate_city) & (flight.data["OriginCityName"] == org)]
-                
-                # Append the dataframes to the lists
-                all_hotel_data.append(current_hotel_data)
-                all_restaurant_data.append(current_restaurant_data)
-                all_flight_data.append(current_flight_data)
-        
-        # Use concat to combine all dataframes in the lists
-        hotel_data = pd.concat(all_hotel_data, axis=0)
-        restaurant_data = pd.concat(all_restaurant_data, axis=0)
-        flight_data = pd.concat(all_flight_data, axis=0)
-        # flight_data should be in the range of supported date
-        flight_data = flight_data[flight_data['FlightDate'].isin(date)]
+class ResearchAgent(Agent):
+    """Researcher with a fixed expected output size."""
 
-    if people_number:
-        hotel_data = hotel_data[hotel_data['maximum occupancy'] >= people_number]
+    model = Model.mock(latency_seconds=0.05, lorem_length=8)
+    system_prompt = "You research topics and summarise findings."
 
-    if local_constraint:
+    # Typically produces ~350 output tokens per call
+    output_tokens_estimate = 350
 
-        if local_constraint['transportation'] == 'no self-driving':
-            if grain == "city":
-                if len(flight_data[flight_data['FlightDate'] == date[0]]) < 2:
-                    raise ValueError("No flight data available for the given constraints.")
-            elif grain == "state":
-                if len(flight_data[flight_data['FlightDate'] == date[0]]) < 10:
-                    raise ValueError("No flight data available for the given constraints.")
-                
-        elif local_constraint['transportation'] == 'no flight':
-            if len(flight_data[flight_data['FlightDate'] == date[0]]) < 2 or flight_data.iloc[0]['Distance'] > 800:
-                raise ValueError("Impossible")
-            
+    async def arun(self, input_text: str) -> Response[str]:
+        return Response(content=f"Research on '{input_text[:40]}': Key findings here.", cost=0.006)
 
-        if local_constraint['room type']:
-            if local_constraint['room type'] == 'shared room':
-                hotel_data = hotel_data[hotel_data['room type'] == 'Shared room']
-            elif local_constraint['room type'] == 'not shared room':
-                hotel_data = hotel_data[(hotel_data['room type'] == 'Private room') | (hotel_data['room type'] == 'Entire home/apt')]
-            elif local_constraint['room type'] == 'private room':
-                hotel_data = hotel_data[hotel_data['room type'] == 'Private room']
-            elif local_constraint['room type'] == 'entire room':
-                hotel_data = hotel_data[hotel_data['room type'] == 'Entire home/apt']
 
-            if days == 3:
-                if len(hotel_data) < 3:
-                    raise ValueError("No hotel data available for the given constraints.")
-            elif days == 5:
-                if len(hotel_data) < 5:
-                    raise ValueError("No hotel data available for the given constraints.")
-            elif days == 7:
-                if len(hotel_data) < 7:
-                    raise ValueError("No hotel data available for the given constraints.")
-        
-        if local_constraint['house rule']:
-            if local_constraint['house rule'] == 'parties':
-                # the house rule should not contain 'parties'
-                hotel_data = hotel_data[~hotel_data['house_rules'].str.contains('No parties')]
-            elif local_constraint['house rule'] == 'smoking':
-                hotel_data = hotel_data[~hotel_data['house_rules'].str.contains('No smoking')]
-            elif local_constraint['house rule'] == 'children under 10':
-                hotel_data = hotel_data[~hotel_data['house_rules'].str.contains('No children under 10')]
-            elif local_constraint['house rule'] == 'pets':
-                hotel_data = hotel_data[~hotel_data['house_rules'].str.contains('No pets')]
-            elif local_constraint['house rule'] == 'visitors':
-                hotel_data = hotel_data[~hotel_data['house_rules'].str.contains('No visitors')]
-        
-            if days == 3:
-                if len(hotel_data) < 3:
-                    raise ValueError("No hotel data available for the given constraints.")
-            elif days == 5:
-                if len(hotel_data) < 5:
-                    raise ValueError("No hotel data available for the given constraints.")
-            elif days == 7:
-                if len(hotel_data) < 7:
-                    raise ValueError("No hotel data available for the given constraints.")
-                
-        if local_constraint['cuisine']:
-            # judge whether the cuisine is in the cuisine list
-            restaurant_data = restaurant_data[restaurant_data['Cuisines'].str.contains('|'.join(local_constraint['cuisine']))]
-            
-            if days == 3:
-                if len(restaurant_data) < 3:
-                    raise ValueError("No restaurant data available for the given constraints.")
-            elif days == 5:
-                if len(restaurant_data) < 5:
-                    raise ValueError("No restaurant data available for the given constraints.")
-            elif days == 7:
-                if len(restaurant_data) < 7:
-                    raise ValueError("No restaurant data available for the given constraints.")
+class AnalysisAgent(Agent):
+    """Analyst with variable output size: sometimes brief, sometimes detailed."""
 
-    # Calculate budgets for all three modes
+    model = Model.mock(latency_seconds=0.05, lorem_length=8)
+    system_prompt = "You analyse data and provide strategic insights."
 
-    budgets = {}
-    for mode in ["lowest", "highest", "average"]:
-        if local_constraint and local_constraint['transportation'] == 'self driving':
-            flight_budget = eval(distanceMatrix.run(org, dest)['cost'].replace("$","")) * multipliers[days]["flight"]
-        else:
-            flight_budget = estimate_budget(flight_data["Price"].tolist(), mode) * multipliers[days]["flight"]
-        hotel_budget = estimate_budget(hotel_data["price"].tolist(), mode) * multipliers[days]["hotel"]
-        restaurant_budget = estimate_budget(restaurant_data["Average Cost"].tolist(), mode) * multipliers[days]["restaurant"]
-        total_budget = flight_budget + hotel_budget + restaurant_budget
-        budgets[mode] = total_budget
+    # Output varies widely: p50 = 200 tokens, p95 = 800 tokens
+    output_tokens_estimate = (200, 800)
 
-    return budgets
+    async def arun(self, input_text: str) -> Response[str]:
+        return Response(content=f"Analysis: {input_text[:60]}. Three insights found.", cost=0.008)
+
+
+class WriterAgent(Agent):
+    """Writer with no output_tokens_estimate — falls back to historical/default."""
+
+    model = Model.mock(latency_seconds=0.05, lorem_length=8)
+    system_prompt = "You write polished copy from research and analysis."
+
+    # No output_tokens_estimate set — estimator uses history or default fallback.
+    # low_confidence=True will be set on this step's estimate.
+
+    async def arun(self, input_text: str) -> Response[str]:
+        return Response(content=f"## Report\n\n{input_text[:80]}...", cost=0.005)
+
+
+# ── Example 1: Basic EstimationReport ────────────────────────────────────────
+#
+# wf.estimate() runs without any LLM calls and returns an EstimationReport.
+
+
+async def example_basic_estimation() -> None:
+    print("\n── Example 1: Basic EstimationReport ──────────────────────────")
+
+    wf = Workflow("research-pipeline").step(ResearchAgent).step(AnalysisAgent).step(WriterAgent)
+
+    report: EstimationReport = wf.estimate("AI agent adoption in enterprise 2026")
+
+    print(f"Total p50 (median expected cost): ${report.total_p50:.6f}")
+    print(f"Total p95 (95th percentile cost): ${report.total_p95:.6f}")
+    print(f"Budget sufficient (no budget set): {report.budget_sufficient}")
+    print(f"Low confidence (fallback used):    {report.low_confidence}")
+
+    print("\nPer-step breakdown:")
+    step_names = ["ResearchAgent", "AnalysisAgent", "WriterAgent"]
+    for i, step in enumerate(report.per_step):
+        name = step_names[i] if i < len(step_names) else f"Step {i}"
+        print(
+            f"  {name:<20}  p50=${step.p50:.6f}  p95=${step.p95:.6f}  "
+            f"low_conf={step.low_confidence}"
+        )
+
+
+# ── Example 2: Estimation with budget (budget_sufficient check) ───────────────
+
+
+async def example_estimation_with_budget() -> None:
+    print("\n── Example 2: Estimation with budget ────────────────────────────")
+
+    # Generous budget — should be sufficient
+    wf_generous = (
+        Workflow("research-pipeline", budget=Budget(max_cost=1.00))
+        .step(ResearchAgent)
+        .step(AnalysisAgent)
+        .step(WriterAgent)
+    )
+    report_ok = wf_generous.estimate("Cloud computing cost trends")
+    print(
+        f"Budget $1.00:  p95=${report_ok.total_p95:.6f}  sufficient={report_ok.budget_sufficient}"
+    )
+
+    # Very tight budget — almost certainly insufficient
+    wf_tight = (
+        Workflow("research-pipeline", budget=Budget(max_cost=0.0001))
+        .step(ResearchAgent)
+        .step(AnalysisAgent)
+        .step(WriterAgent)
+    )
+    report_tight = wf_tight.estimate("Cloud computing cost trends")
+    print(
+        f"Budget $0.0001: p95=${report_tight.total_p95:.6f}  sufficient={report_tight.budget_sufficient}"
+    )
+
+
+# ── Example 3: Preflight validation with PreflightPolicy.BELOW_P95 ──────────
+
+──
+#
+# When Budget(preflight=True, preflight_fail_on=PreflightPolicy.BELOW_P95),
+# the agent raises InsufficientBudgetError before the first LLM call if the
+# budget is below the p95 estimate.
+
+
+async def example_preflight_validation() -> None:
+    print("\n── Example 3: Preflight validation (PreflightPolicy.BELOW_P95) ─")
+
+    class PrefightResearcher(Agent):
+        model = Model.mock(latency_seconds=0.05, lorem_length=8)
+        system_prompt = "Research agent with preflight budget check."
+        output_tokens_estimate = 500  # gives estimator a hint
+
+        async def arun(self, input_text: str) -> Response[str]:
+            return Response(content="Research complete.", cost=0.01)
+
+    # Tight budget + BELOW_P95 policy → should raise InsufficientBudgetError
+    agent_tight = PrefightResearcher(
+        budget=Budget(
+            max_cost=0.000001,  # deliberately tiny
+            preflight=True,
+            preflight_fail_on=PreflightPolicy.BELOW_P95,
+        )
+    )
+
+    try:
+        await agent_tight.arun("Research AI trends")
+        print("  No error raised (budget was sufficient)")
+    except Exception as exc:
+        print(f"  {type(exc).__name__}: {exc}")
+
+    # Generous budget + BELOW_P95 → no error
+    agent_generous = PrefightResearcher(
+        budget=Budget(
+            max_cost=10.00,
+            preflight=True,
+            preflight_fail_on=PreflightPolicy.BELOW_P95,
+        )
+    )
+
+    result = await agent_generous.arun("Research AI trends")
+    print(f"  Generous budget: run succeeded, cost=${result.cost:.6f}")
+
+
+# ── Example 4: Hook.ESTIMATION_COMPLETE ───────────────────────────────────────
+#
+# When Budget(estimation=True) is set, the agent fires Hook.ESTIMATION_COMPLETE
+# before the first LLM call with the pre-flight estimate.
+
+
+async def example_estimation_hook() -> None:
+    print("\n── Example 4: Hook.ESTIMATION_COMPLETE ─────────────────────────")
+
+    estimation_events: list[dict[str, object]] = []
+
+    class TrackedAgent(Agent):
+        model = Model.mock(latency_seconds=0.05, lorem_length=8)
+        system_prompt = "You complete tasks concisely."
+        output_tokens_estimate = 300
+
+        async def arun(self, input_text: str) -> Response[str]:
+            return Response(content=f"Done: {input_text[:40]}", cost=0.005)
+
+    agent = TrackedAgent(budget=Budget(max_cost=1.00, estimation=True))
+
+    agent.events.on(
+        Hook.ESTIMATION_COMPLETE,
+        lambda ctx: estimation_events.append(dict(ctx)),
+    )
+
+    await agent.arun("Summarise AI trends for Q1 2026")
+
+    if estimation_events:
+        evt = estimation_events[0]
+        print("  Estimation event captured:")
+        print(f"    p50:         ${evt.get('p50', 'n/a')}")
+        print(f"    p95:         ${evt.get('p95', 'n/a')}")
+        print(f"    sufficient:  {evt.get('sufficient', 'n/a')}")
+        print(f"    low_confidence: {evt.get('low_confidence', 'n/a')}")
+    else:
+        print("  (Estimation event not captured on this run — no history yet)")
+        print("  Run the agent a few times to build history, then estimation fires.")
+
+
+# ── Main ──────────────────────────────────────────────────────────────────────
+
+
+async def main() -> None:
+    await example_basic_estimation()
+    await example_estimation_with_budget()
+    await example_preflight_validation()
+    await example_estimation_hook()
+    print("\nAll budget estimation examples completed.")
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
