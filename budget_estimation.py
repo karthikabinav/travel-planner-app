@@ -112,54 +112,7 @@ def budget_calc(org, dest, days, date:list , people_number=None, local_constrain
             elif local_constraint['room type'] == 'private room':
                 hotel_data = hotel_data[hotel_data['room type'] == 'Private room']
             elif local_constraint['room type'] == 'entire room':
-                hotel_data = hotel_data[hotel_data['room type'] == 'Entire home/apt']
-
-            if days == 3:
-                if len(hotel_data) < 3:
-                    raise ValueError("No hotel data available for the given constraints.")
-            elif days == 5:
-                if len(hotel_data) < 5:
-                    raise ValueError("No hotel data available for the given constraints.")
-            elif days == 7:
-                if len(hotel_data) < 7:
-                    raise ValueError("No hotel data available for the given constraints.")
-        
-        if local_constraint['house rule']:
-            if local_constraint['house rule'] == 'parties':
-                # the house rule should not contain 'parties'
-                hotel_data = hotel_data[~hotel_data['house_rules'].str.contains('No parties')]
-            elif local_constraint['house rule'] == 'smoking':
-                hotel_data = hotel_data[~hotel_data['house_rules'].str.contains('No smoking')]
-            elif local_constraint['house rule'] == 'children under 10':
-                hotel_data = hotel_data[~hotel_data['house_rules'].str.contains('No children under 10')]
-            elif local_constraint['house rule'] == 'pets':
-                hotel_data = hotel_data[~hotel_data['house_rules'].str.contains('No pets')]
-            elif local_constraint['house rule'] == 'visitors':
-                hotel_data = hotel_data[~hotel_data['house_rules'].str.contains('No visitors')]
-        
-            if days == 3:
-                if len(hotel_data) < 3:
-                    raise ValueError("No hotel data available for the given constraints.")
-            elif days == 5:
-                if len(hotel_data) < 5:
-                    raise ValueError("No hotel data available for the given constraints.")
-            elif days == 7:
-                if len(hotel_data) < 7:
-                    raise ValueError("No hotel data available for the given constraints.")
-                
-        if local_constraint['cuisine']:
-            # judge whether the cuisine is in the cuisine list
-            restaurant_data = restaurant_data[restaurant_data['Cuisines'].str.contains('|'.join(local_constraint['cuisine']))]
-            
-            if days == 3:
-                if len(restaurant_data) < 3:
-                    raise ValueError("No restaurant data available for the given constraints.")
-            elif days == 5:
-                if len(restaurant_data) < 5:
-                    raise ValueError("No restaurant data available for the given constraints.")
-            elif days == 7:
-                if len(restaurant_data) < 7:
-                    raise ValueError("No restaurant data available for the given constraints.")
+                hotel_data = hotel_data
 
     # Calculate budgets for all three modes
 
