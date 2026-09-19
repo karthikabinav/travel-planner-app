@@ -12,14 +12,11 @@ distanceMatrix = GoogleDistanceMatrix()
 
 
 def estimate_budget(data, mode):
-    """
-    Estimate the budget based on the mode (lowest, highest, average) for flight, hotel, or restaurant data.
-    """
+    """Estimate the budget based on the mode (lowest, highest, average) for flight, hotel, or restaurant data."""
     if mode == "lowest":
         return min(data)
     elif mode == "highest":
         return max(data)
     elif mode == "average":
-        # filter the nan values
-        data = [x for x in data if str(x) != "nan"]
+        data = [x for x in data if str(x) != 'nan']
         return sum(data) / len(data)
