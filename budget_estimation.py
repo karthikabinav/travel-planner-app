@@ -20,3 +20,5 @@ def estimate_budget(data, mode):
     elif mode == "average":
         data = [x for x in data if str(x) != 'nan']
         return sum(data) / len(data)
+
+# NOTE: Original file in OSU-NLP-Group/TravelPlanner utils/budget_estimation.py contains eval() on external distance matrix data in budget_calc, which is an unsafe code-injection pattern. That function was not copied verbatim; a safe float() parsing should be used instead of eval() if budget_calc is reimplemented.
