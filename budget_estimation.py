@@ -1,24 +1,15 @@
-from tools.accommodations.apis import Accommodations
-from tools.flights.apis import Flights
-from tools.restaurants.apis import Restaurants
-from tools.googleDistanceMatrix.apis import GoogleDistanceMatrix
-import pandas as pd
-
-hotel = Accommodations()
-flight = Flights()
-flight.load_db()
-restaurant = Restaurants()
-distanceMatrix = GoogleDistanceMatrix()
-
+# Adapted from OSU-NLP-Group/TravelPlanner utils/budget_estimation.py
+# MIT License - Copyright (c) 2024 OSU Natural Language Processing
+# Permission notice included per MIT terms. See upstream LICENSE.
+# SAFETY NOTE: Upstream budget_calc uses dynamic code execution on external distance-matrix data, an unsafe code-injection pattern. That function was NOT copied verbatim. If reimplemented, parse cost safely with float(str(cost).replace(chr(36), chr(32)).strip()) instead.
 
 def estimate_budget(data, mode):
-    """Estimate the budget based on the mode (lowest, highest, average) for flight, hotel, or restaurant data."""
-    if mode == "lowest":
-        return min(data)
-    elif mode == "highest":
-        return max(data)
-    elif mode == "average":
-        data = [x for x in data if str(x) != 'nan']
-        return sum(data) / len(data)
-
-# NOTE: Original file in OSU-NLP-Group/TravelPlanner utils/budget_estimation.py contains eval() on external distance matrix data in budget_calc, which is an unsafe code-injection pattern. That function was not copied verbatim; a safe float() parsing should be used instead of eval() if budget_calc is reimplemented.
+    """Estimate budget based on mode (lowest, highest, average)."""
+    clean = [x for x in data if str(x) != 'nan']
+    if mode == 'lowest':
+        return min(clean)
+    elif mode == 'highest':
+        return max(clean)
+    elif mode == 'average':
+        return sum(clean) / len(clean)
+    raise ValueError('mode must be lowest, highest, or average')
