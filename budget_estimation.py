@@ -1,7 +1,7 @@
 # Adapted from OSU-NLP-Group/TravelPlanner utils/budget_estimation.py
 # MIT License - Copyright (c) 2024 OSU Natural Language Processing
 # Permission notice included per MIT terms. See upstream LICENSE.
-# SAFETY NOTE: Upstream budget_calc uses dynamic code execution on external distance-matrix data, an unsafe code-injection pattern. That function was NOT copied verbatim. If reimplemented, parse cost safely with float(str(cost).replace(chr(36), chr(32)).strip()) instead.
+# SAFETY NOTE: Upstream budget_calc uses unsafe dynamic code execution on external distance-matrix data. That function was NOT copied verbatim. If reimplemented, parse cost safely with float conversion instead.
 
 def estimate_budget(data, mode):
     """Estimate budget based on mode (lowest, highest, average)."""
