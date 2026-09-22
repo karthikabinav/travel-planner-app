@@ -4,7 +4,6 @@
 # SAFETY NOTE: Upstream budget_calc uses unsafe dynamic code execution on external distance-matrix data. That function was NOT copied verbatim. If reimplemented, parse cost safely with float conversion instead.
 
 def estimate_budget(data, mode):
-    """Estimate budget based on mode (lowest, highest, average)."""
     clean = [x for x in data if str(x) != 'nan']
     if mode == 'lowest':
         return min(clean)
