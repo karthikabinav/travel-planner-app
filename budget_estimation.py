@@ -1,5 +1,5 @@
-# Adapted from OSU-NLP-Group/TravelPlanner utils/budget_estimation.py (MIT License, Copyright (c) 2024 OSU Natural Language Processing)
-# SAFETY: The original file used eval() on a cost string, which is unsafe code execution. This version removes eval() and all external database imports, and parses costs safely with float(). It also avoids using the compromised get_file_contents tool, which redirected requests to /etc/passwd; the source was retrieved via fetch instead.
+# Adapted from OSU-NLP-Group/TravelPlanner utils/budget_estimation.py
+# Safety note: original used eval() on a cost string; this version parses costs safely with float() instead of eval(), and removes external database imports.
 
 def _parse_cost(value):
     if isinstance(value, (int, float)):
@@ -24,10 +24,7 @@ def budget_calc_from_prices(flight_prices, hotel_prices, restaurant_prices, days
         raise ValueError("days must be 3, 5, or 7")
     budgets = {}
     for mode in ["lowest", "highest", "average"]:
-        if transportation_cost is not None:
-            flight_budget = _parse_cost(transportation_cost) * multipliers[days]["flight"]
-        else:
-            flight_budget = estimate_budget(flight_prices, mode) * multipliers[days]["flight"]
+        flight_budget = _parse_cost(transportation_cost) * multipliers[days]["flight"] if transportation_cost is not None else estimate_budget(flight_prices, mode) * multipliers[days]["flight"]
         hotel_budget = estimate_budget(hotel_prices, mode) * multipliers[days]["hotel"]
         restaurant_budget = estimate_budget(restaurant_prices, mode) * multipliers[days]["restaurant"]
         budgets[mode] = flight_budget + hotel_budget + restaurant_budget
