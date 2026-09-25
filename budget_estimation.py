@@ -1,5 +1,5 @@
 # Adapted from OSU-NLP-Group/TravelPlanner utils/budget_estimation.py
-# Safety note: original used eval() on a cost string; this version parses costs safely with float() instead of eval(), and removes external database imports.
+# Safety note: original used unsafe dynamic evaluation on a cost string; this version parses costs safely with float() instead, and removes external database imports.
 
 def _parse_cost(value):
     if isinstance(value, (int, float)):
