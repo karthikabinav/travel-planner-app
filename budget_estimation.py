@@ -23,7 +23,7 @@ def estimate_budget(data, mode):
         # filter the nan values
         data = [x for x in data if str(x) != 'nan']
         return sum(data) / len(data)
-
+    
 
 def budget_calc(org, dest, days, date:list , people_number=None, local_constraint = None):
     """
@@ -37,14 +37,14 @@ def budget_calc(org, dest, days, date:list , people_number=None, local_constrain
 
     if grain not in ["city", "state"]:
         raise ValueError("grain must be one of city, state")
-
+    
     # Multipliers based on days
     multipliers = {
         3: {"flight": 2, "hotel": 3, "restaurant": 9},
         5: {"flight": 3, "hotel": 5, "restaurant": 15},
         7: {"flight": 4, "hotel": 7, "restaurant": 21}
     }
-
+    
     if grain == "city":
         hotel_data = hotel.run(dest)
         restaurant_data = restaurant.run(dest)
@@ -175,3 +175,4 @@ def budget_calc(org, dest, days, date:list , people_number=None, local_constrain
         budgets[mode] = total_budget
 
     return budgets
+
