@@ -10,6 +10,7 @@ flight.load_db()
 restaurant = Restaurants()
 distanceMatrix = GoogleDistanceMatrix()
 
+
 def estimate_budget(data, mode):
     """
     Estimate the budget based on the mode (lowest, highest, average) for flight, hotel, or restaurant data.
@@ -35,14 +36,14 @@ def budget_calc(org, dest, days, date:list , people_number=None, local_constrain
 
     if grain not in ["city", "state"]:
         raise ValueError("grain must be one of city, state")
-
+    
     # Multipliers based on days
     multipliers = {
         3: {"flight": 2, "hotel": 3, "restaurant": 9},
         5: {"flight": 3, "hotel": 5, "restaurant": 15},
         7: {"flight": 4, "hotel": 7, "restaurant": 21}
     }
-
+    
     if grain == "city":
         hotel_data = hotel.run(dest)
         restaurant_data = restaurant.run(dest)
@@ -51,25 +52,25 @@ def budget_calc(org, dest, days, date:list , people_number=None, local_constrain
 
     elif grain == "state":
         city_set = open('../database/background/citySet_with_states.txt').read().strip().split('\n')
-
+        
         all_hotel_data = []
         all_restaurant_data = []
         all_flight_data = []
-
+        
         for city in city_set:
             if dest == city.split('\t')[1]:
                 candidate_city = city.split('\t')[0]
-
+                
                 # Fetch data for the current city
                 current_hotel_data = hotel.run(candidate_city)
                 current_restaurant_data = restaurant.run(candidate_city)
                 current_flight_data = flight.data[(flight.data["DestCityName"] == candidate_city) & (flight.data["OriginCityName"] == org)]
-
+                
                 # Append the dataframes to the lists
                 all_hotel_data.append(current_hotel_data)
                 all_restaurant_data.append(current_restaurant_data)
                 all_flight_data.append(current_flight_data)
-
+        
         # Use concat to combine all dataframes in the lists
         hotel_data = pd.concat(all_hotel_data, axis=0)
         restaurant_data = pd.concat(all_restaurant_data, axis=0)
@@ -101,7 +102,7 @@ def budget_calc(org, dest, days, date:list , people_number=None, local_constrain
         #         flight_data = flight_data[(flight_data['DepTime'] >= '12:00') & (flight_data['DepTime'] < '18:00')]
         #     elif local_constraint['flgiht time'] == 'evening':
         #         flight_data = flight_data[flight_data['DepTime'] >= '18:00']
-        
+
         if local_constraint['room type']:
             if local_constraint['room type'] == 'shared room':
                 hotel_data = hotel_data[hotel_data['room type'] == 'Shared room']
