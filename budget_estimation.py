@@ -24,6 +24,7 @@ def estimate_budget(data, mode):
         data = [x for x in data if str(x) != 'nan']
         return sum(data) / len(data)
     
+
 def budget_calc(org, dest, days, date:list , people_number=None, local_constraint = None):
     """
     Calculate the estimated budget for all three modes: lowest, highest, average.
